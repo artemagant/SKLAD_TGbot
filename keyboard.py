@@ -18,8 +18,21 @@ def get_main_menu():
 
 def get_storage_menu():
     keyboard = [
-        [tg.InlineKeyboardButton("Добавить склад", callback_data="add_storage")],
-        [tg.InlineKeyboardButton("Вернуться", callback_data="return")]
-
+        [tg.InlineKeyboardButton("Добавить склад", callback_data = "add_storage")],
+        [tg.InlineKeyboardButton("Вернуться", callback_data = "return")]
     ]
     return tg.InlineKeyboardMarkup(keyboard)
+
+def get_info_menu():
+    keyboard = [
+        [tg.InlineKeyboardButton("Личная информация", callback_data = "info_user")],
+        [tg.InlineKeyboardButton("Информация бота", callback_data = "info_bot")]
+    ]
+    return tg.InlineKeyboardMarkup(keyboard)
+
+def get_add_storage_menu():
+    keyboard = [
+        [tg.InlineKeyboardButton("Отменить", callback_data = "cancel_bot_creation")]
+    ]
+    return tg.InlineKeyboardMarkup(keyboard)
+

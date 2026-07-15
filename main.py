@@ -1,8 +1,8 @@
 import telegram as tg
 import telegram.ext as tgext
 
-import commands as cmd
-import button_handler as btn_handler
+import commands as cmd # commands.py - for CommandHandler functions
+import button_handler as btn_handler # button_handler.py - for handle function
 
 TOKEN = "no token"
 with open("token.txt", "r") as file:
@@ -22,6 +22,8 @@ def main():
 
     app.add_handler(tgext.CommandHandler("start", cmd.start))
     app.add_handler(tgext.CommandHandler("storage", cmd.storage))
+    app.add_handler(tgext.CommandHandler("info", cmd.info))
+    app.add_handler(tgext.CommandHandler("admin", cmd.admin))
 
     app.add_handler(tgext.CallbackQueryHandler(btn_handler.handle))
 
