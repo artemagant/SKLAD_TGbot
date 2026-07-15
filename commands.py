@@ -4,8 +4,10 @@ import telegram.ext as tgext
 import keyboard as keyboard
 import data as data
 
+def commands_action(update: Update):
+    data.set_state(update.effective_user.username, "None")
 
-async def start(update: Update, context: tgext.ContextTypes.DEFAULT_TYPE):
+async def start(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
     user_data = data.get_user_data(update.effective_user.username)
     if not user_data:
         user_data = data.get_default_user(update.effective_user.username)
@@ -18,14 +20,16 @@ async def start(update: Update, context: tgext.ContextTypes.DEFAULT_TYPE):
         "Главное меню",
         reply_markup = keyboard.get_main_menu() 
     )
+
+    commands_action(update)
+
     return 0
 
 
-async def storage(update: Update, context: tgext.ContextTypes.DEFAULT_TYPE):
+async def storage(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
     user_data = data.get_user_data(update.effective_user.username)
 
     if not user_data:
-        data.write_to_log(user_data, f"Not started user")
         await update.message.reply_text(
             "Активируйте бота перед началом (/start)"
         )
@@ -36,30 +40,41 @@ async def storage(update: Update, context: tgext.ContextTypes.DEFAULT_TYPE):
         "Меню складов",
         reply_markup = keyboard.get_storage_menu()
     )
+
+    commands_action(update)
+
     return 0
 
 
-async def info(update: Update, context: tgext.ContextTypes.DEFAULT_TYPE):
+async def info(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
     user_data = data.get_user_data(update.effective_user.username)
     if not user_data:
-        data.write_to_log(user_data, f"Not started user")
         await update.message.reply_text(
             "Активируйте бота перед началом (/start)"
         )
         return 1
 
-    data.write_to_log(f"Info menu opened")
+    data.write_to_log(user_data, f"Info menu opened")
+
+    info_keyboard = None
+    if user_data["info"]["admin"]:
+        info_keyboard = keyboard.get_info_menu_admin()
+    else:
+        info_keyboard = keyboard.get_info_menu()
+    data.write_to_log(user_data, f"Info menu opened")
     await update.message.reply_text(
         "Меню информации",
-        reply_markup = keyboard.get_info_menu()
+        reply_markup = info_keyboard
     )
+
+    commands_action(update)
+
     return 0
 
 
-async def admin(update: Update, context: tgext.ContextTypes.DEFAULT_TYPE): 
+async def admin(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
     user_data = data.get_user_data(update.effective_user.username)
     if not user_data:
-        data.write_to_log(user_data, f"Not started user")
         await update.message.reply_text(
             "Активируйте бота перед началом (/start)"
         )
@@ -67,13 +82,13 @@ async def admin(update: Update, context: tgext.ContextTypes.DEFAULT_TYPE):
 
     data.write_to_log(user_data, f"Admin menu was called")
     user_data = data.get_user_data(update.effective_user.username)
-     
+
     if user_data["info"]["admin"]:
         data.write_to_log(user_data, f"Admin menu opened")
         user_data = data.get_user_data(update.effective_user.username)
         await update.message.reply_text(
             "Да, на самом деле, ты админ",
-            reply_markup = keyboard.get_info_menu()
+            reply_markup = keyboard.get_admin_menu()
         )
     else:
         data.write_to_log(user_data, f"Admin access denied")
@@ -83,5 +98,7 @@ async def admin(update: Update, context: tgext.ContextTypes.DEFAULT_TYPE):
             reply_markup = keyboard.get_under_construction_menu()
         )
 
-    return 0
+    commands_action(update)
 
+
+    return 0

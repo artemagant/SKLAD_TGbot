@@ -3,9 +3,11 @@ import telegram.ext as tgext
 
 import commands as cmd # commands.py - for CommandHandler functions
 import button_handler as btn_handler # button_handler.py - for handle function
+import message_handler as mes_handler
+import data as data
 
 TOKEN = "no token"
-with open("token.txt", "r") as file:
+with open("../TgBotsTokens/SKLAD_token.txt", "r") as file:
     TOKEN = file.read().strip()
 
 #async def command_start(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
@@ -26,6 +28,7 @@ def main():
     app.add_handler(tgext.CommandHandler("admin", cmd.admin))
 
     app.add_handler(tgext.CallbackQueryHandler(btn_handler.handle))
+    app.add_handler(tgext.MessageHandler(tgext.filters.TEXT & ~tgext.filters.COMMAND, mes_handler.handle_text))
 
     print("\nBot started\n")
     app.run_polling()
