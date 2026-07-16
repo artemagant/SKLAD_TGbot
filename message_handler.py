@@ -15,9 +15,9 @@ async def handle_text(update: Update, context):
         return 1
 
     state = data.get_state(update.effective_user.username)
-    text = update.message.text
-    mes = data.get_user_data(text) 
+    text = update.message.text 
     if (state == "admin_username_await"):
+        mes = data.get_user_data(text)
         if (data.get_user_data(text)):
             mes["Log"] = str(len(mes["Log"])) + " line/s of log"
             data.write_to_log(user_data, f"Accessed data of {text}")
@@ -29,5 +29,19 @@ async def handle_text(update: Update, context):
             await update.message.reply_text(
                 f"Юзер @{text} еще не активировал бота\nХочешь создать для юзера дефолтную дату?",
                 reply_markup = keyboard.get_create_default_user_data_menu(text)
+            )
+
+    if (state == "storage_name"):
+        if (data.create_storage(user_data, text)):
+            data.write_to_log(user_data, f"Storage creation denied - '{text}' already exists")
+            await update.message.reply_text(
+                f"Склад '{text}' уже существует",
+                reply_markup = keyboard.get_return_to_storage_menu()
+            )
+        else:
+            data.write_to_log(user_data, f"Create storage '{text}'")
+            await update.message.reply_text(
+                f"Успех! Склад '{text}' создан",
+                reply_markup = keyboard.get_successed_storage_creation_menu(text, user_data)
             )
     data.set_state(update.effective_user.username, "None")

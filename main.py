@@ -31,7 +31,7 @@ def main():
     app.add_handler(tgext.MessageHandler(tgext.filters.TEXT & ~tgext.filters.COMMAND, mes_handler.handle_text))
 
     print("\nBot started\n")
-    app.run_polling()
+    app.run_polling(close_loop = False)
 
 if __name__ == "__main__":
     main()

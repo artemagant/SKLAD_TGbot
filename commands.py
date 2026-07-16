@@ -94,10 +94,9 @@ async def admin(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
         data.write_to_log(user_data, f"Admin access denied")
         user_data = data.get_user_data(update.effective_user.username)
         await update.message.reply_text(
-            "У тебя нет админ доступа",
+            "У тебя нет админ доступа.\nСвяжитесь с @artemagant для его получения",
             reply_markup = keyboard.get_under_construction_menu()
         )
-
     commands_action(update)
 
 

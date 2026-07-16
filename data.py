@@ -34,12 +34,39 @@ def get_default_user(username: String):
         },
         "info": {
             "username": username,
-            "admin": True,
+            "admin": False,
             "state": None,
         },
         "Log": {}
     }
     return user
+
+
+#
+# Storage
+#
+
+def get_default_storage(storage_name):
+    return {
+        "storage":{},
+        "info": {
+            "name": storage_name
+        }
+    }
+
+def create_storage(user_data, storage_name):
+    storages = user_data.get("storages", {})
+    if (storages.get(storage_name, None)):
+        return 1
+    storages[storage_name] = get_default_storage(storage_name)
+    user_data["storages"] = storages
+    save_user_data(user_data)
+    return 0
+
+
+#
+# Admin
+#
 
 def delete_user_data(username):
     data = load_data()
