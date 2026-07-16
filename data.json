@@ -2,25 +2,29 @@
   "artemagant": {
     "storages": {
       "a": {
-        "storage": {},
-        "info": {}
-      },
-      "q": {
-        "storage": {},
+        "storage": {
+          "a": {
+            "name": "a",
+            "description": null,
+            "place": null,
+            "amount": 0,
+            "date_creating": "2026-07-16 22:28:24"
+          }
+        },
         "info": {
-          "name": "q"
+          "name": "a",
+          "description": null,
+          "date_creating": "2026-07-16 20:39:44",
+          "level": 0
         }
       },
-      "aw": {
+      "b": {
         "storage": {},
         "info": {
-          "name": "aw"
-        }
-      },
-      "dick": {
-        "storage": {},
-        "info": {
-          "name": "dick"
+          "name": "b",
+          "description": null,
+          "date_creating": "2026-07-16 20:40:29",
+          "level": 0
         }
       }
     },
@@ -30,21 +34,104 @@
       "state": "None"
     },
     "Log": {
-      "2026-07-16 16:44:03 +0400": "Logs been resets by @artemagant",
-      "2026-07-16 16:44:07 +0400": "Storage menu opened",
-      "2026-07-16 16:44:11 +0400": "Storage list opened",
-      "2026-07-16 16:44:15 +0400": "Configure storage 'dick' of @artemagant",
-      "2026-07-16 16:44:30 +0400": "Menu 'storageitems_artemagant_dick' opened",
-      "2026-07-16 16:44:32 +0400": "Main menu opened",
-      "2026-07-16 16:44:34 +0400": "Storage menu opened",
-      "2026-07-16 16:44:36 +0400": "Storage list opened",
-      "2026-07-16 16:44:38 +0400": "Configure storage 'dick' of @artemagant",
-      "2026-07-16 16:44:45 +0400": "Menu 'storagesettings_artemagant_dick' opened",
-      "2026-07-16 16:44:48 +0400": "Main menu opened",
-      "2026-07-16 16:45:05 +0400": "Storage menu opened",
-      "2026-07-16 16:45:06 +0400": "Storage list opened",
-      "2026-07-16 16:45:10 +0400": "Configure storage 'a' of @artemagant",
-      "2026-07-16 16:45:56 +0400": "Menu 'storagesettings_artemagant_a' opened"
+      "2026-07-16 21:26:47": "Logs been resets by @artemagant",
+      "2026-07-16 21:27:04": "Admin menu called",
+      "2026-07-16 21:29:39": "Main menu opened",
+      "2026-07-16 21:29:40": "Main menu opened",
+      "2026-07-16 21:29:41": "Info menu opened",
+      "2026-07-16 21:29:45": "Main menu opened",
+      "2026-07-16 21:29:48": "Storage menu opened",
+      "2026-07-16 21:29:52": "Storage list opened",
+      "2026-07-16 21:29:55": "Configure storage 'a' of @artemagant",
+      "2026-07-16 21:30:05": "Storage 'a' itemes of @artemagant opened",
+      "2026-07-16 21:31:19": "Configure storage 'a' of @artemagant",
+      "2026-07-16 21:31:20": "Storage 'a' itemes of @artemagant opened",
+      "2026-07-16 21:31:28": "Configure storage 'a' of @artemagant",
+      "2026-07-16 21:31:29": "Storage list opened",
+      "2026-07-16 21:31:31": "Storage menu opened",
+      "2026-07-16 21:31:35": "Storage list opened",
+      "2026-07-16 21:31:36": "Configure storage 'a' of @artemagant",
+      "2026-07-16 21:31:39": "Storage 'a' itemes of @artemagant opened",
+      "2026-07-16 21:31:45": "Menu 'createitem_artemagant_a' opened",
+      "2026-07-16 21:33:38": "Main menu opened",
+      "2026-07-16 21:33:40": "Storage menu opened",
+      "2026-07-16 21:33:41": "Storage list opened",
+      "2026-07-16 21:33:43": "Configure storage 'a' of @artemagant",
+      "2026-07-16 21:33:50": "Storage 'a' itemes of @artemagant opened",
+      "2026-07-16 21:34:00": "Configure storage 'a' of @artemagant",
+      "2026-07-16 21:34:02": "Storage 'a' itemes of @artemagant opened",
+      "2026-07-16 21:34:11": "Configure storage 'a' of @artemagant",
+      "2026-07-16 21:35:04": "Storage 'a' itemes of @artemagant opened",
+      "2026-07-16 21:35:51": "Configure storage 'a' of @artemagant",
+      "2026-07-16 21:36:27": "Storage 'a' itemes of @artemagant opened",
+      "2026-07-16 21:36:38": "Configure storage 'a' of @artemagant",
+      "2026-07-16 21:36:40": "Storage list opened",
+      "2026-07-16 21:36:41": "Storage menu opened",
+      "2026-07-16 21:36:42": "Main menu opened",
+      "2026-07-16 21:37:09": "Storage menu opened",
+      "2026-07-16 21:37:19": "Storage list opened",
+      "2026-07-16 21:37:21": "Configure storage 'a' of @artemagant",
+      "2026-07-16 21:37:31": "Storage 'a' itemes of @artemagant opened",
+      "2026-07-16 21:37:34": "Menu 'createitem_artemagant_a' opened",
+      "2026-07-16 21:42:35": "Main menu opened",
+      "2026-07-16 21:42:38": "Storage menu opened",
+      "2026-07-16 21:42:39": "Storage list opened",
+      "2026-07-16 21:42:40": "Configure storage 'a' of @artemagant",
+      "2026-07-16 21:42:42": "Storage 'a' itemes of @artemagant opened",
+      "2026-07-16 21:42:44": "In storage 'a' item is creating by @artemagant",
+      "2026-07-16 21:44:21": "Menu 'cancelitemcreating_artemagant_a' opened",
+      "2026-07-16 21:44:24": "Main menu opened",
+      "2026-07-16 21:44:26": "Storage menu opened",
+      "2026-07-16 21:44:54": "Storage list opened",
+      "2026-07-16 21:48:31": "Configure storage 'a' of @artemagant",
+      "2026-07-16 21:48:35": "Storage 'a' itemes of @artemagant opened",
+      "2026-07-16 21:48:38": "In storage 'a' item is creating by @artemagant",
+      "2026-07-16 21:54:53": "Menu 'cancelitemcreating_artemagant_a' opened",
+      "2026-07-16 21:54:56": "Main menu opened",
+      "2026-07-16 21:54:57": "Storage menu opened",
+      "2026-07-16 21:54:58": "Storage list opened",
+      "2026-07-16 21:54:59": "Configure storage 'a' of @artemagant",
+      "2026-07-16 21:55:04": "Storage 'a' itemes of @artemagant opened",
+      "2026-07-16 21:55:06": "In storage 'a' item is creating by @artemagant",
+      "2026-07-16 22:02:46": "Menu 'cancelitemcreating_artemagant_a' opened",
+      "2026-07-16 22:02:52": "Main menu opened",
+      "2026-07-16 22:07:23": "Storage menu opened",
+      "2026-07-16 22:07:25": "Storage list opened",
+      "2026-07-16 22:07:26": "Configure storage 'a' of @artemagant",
+      "2026-07-16 22:07:28": "Storage 'a' itemes of @artemagant opened",
+      "2026-07-16 22:07:29": "In storage 'a' item is creating by @artemagant",
+      "2026-07-16 22:26:13": "Storage menu opened",
+      "2026-07-16 22:26:16": "Storage list opened",
+      "2026-07-16 22:26:17": "Configure storage 'a' of @artemagant",
+      "2026-07-16 22:26:19": "Storage 'a' itemes of @artemagant opened",
+      "2026-07-16 22:26:40": "In storage 'a' item is creating by @artemagant",
+      "2026-07-16 22:27:31": "Storage menu opened",
+      "2026-07-16 22:27:33": "Storage list opened",
+      "2026-07-16 22:27:34": "Configure storage 'a' of @artemagant",
+      "2026-07-16 22:27:35": "Storage 'a' info of @artemagant opened",
+      "2026-07-16 22:27:36": "Configure storage 'a' of @artemagant",
+      "2026-07-16 22:27:37": "Storage 'a' itemes of @artemagant opened",
+      "2026-07-16 22:27:39": "In storage 'a' item is creating by @artemagant",
+      "2026-07-16 22:28:12": "Storage menu opened",
+      "2026-07-16 22:28:13": "Storage list opened",
+      "2026-07-16 22:28:14": "Configure storage 'a' of @artemagant",
+      "2026-07-16 22:28:20": "Storage 'a' itemes of @artemagant opened",
+      "2026-07-16 22:28:22": "In storage 'a' item is creating by @artemagant",
+      "2026-07-16 22:28:29": "Storage menu opened",
+      "2026-07-16 22:29:57": "Storage list opened",
+      "2026-07-16 22:29:58": "Configure storage 'a' of @artemagant",
+      "2026-07-16 22:30:00": "Storage 'a' itemes of @artemagant opened",
+      "2026-07-16 22:30:02": "Menu 'configureitem_artemagant_a' opened",
+      "2026-07-16 22:30:07": "Main menu opened",
+      "2026-07-16 22:30:08": "Storage menu opened",
+      "2026-07-16 22:30:10": "Storage list opened",
+      "2026-07-16 22:30:13": "Configure storage 'a' of @artemagant",
+      "2026-07-16 22:30:15": "Storage 'a' settings of @artemagant opened",
+      "2026-07-16 22:30:43": "Configure storage 'a' of @artemagant",
+      "2026-07-16 22:30:45": "Storage 'a' itemes of @artemagant opened",
+      "2026-07-16 22:30:47": "In storage 'a' item is creating by @artemagant",
+      "2026-07-16 22:30:49": "Menu 'cancelitemcreating_artemagant_a' opened",
+      "2026-07-16 22:30:58": "Main menu opened"
     }
   },
   "Makazi69": {

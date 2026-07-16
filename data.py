@@ -19,7 +19,7 @@ def save_user_data(user_data):
         json.dump(data, file, indent = 2)
 
 
-def get_user_data(username: String):
+def get_user_data(username):
     data = load_data()
     user_data = None
     try:
@@ -28,7 +28,7 @@ def get_user_data(username: String):
         return None
     return user_data
 
-def get_default_user(username: String):
+def get_default_user(username):
     user = {
         "storages": {
         },
@@ -50,8 +50,20 @@ def get_default_storage(storage_name):
     return {
         "storage":{},
         "info": {
-            "name": storage_name
+            "name": storage_name,
+            "description": None,
+            "date_creating": datetime.now(utc_plus_4).strftime("%Y-%m-%d %H:%M:%S"),
+            "level": 0
         }
+    }
+
+def get_default_item(item_name):
+    return {
+        "name": item_name,
+        "description": None,
+        "place": None,
+        "amount": 0,
+        "date_creating": datetime.now(utc_plus_4).strftime("%Y-%m-%d %H:%M:%S")
     }
 
 def create_storage(user_data, storage_name):
@@ -62,6 +74,16 @@ def create_storage(user_data, storage_name):
     user_data["storages"] = storages
     save_user_data(user_data)
     return 0
+
+def create_item(user_data, storage_name, item_name):
+    storage_itemes = user_data["storages"][storage_name]["storage"]
+    storage_itemes[item_name] = get_default_item(item_name)
+    user_data["storage"][storage_name]["storages"] = storage_itemes
+    save_user_data(user_data)
+    return user_data
+
+def get_storage_data(user_data, storage_name):
+    return user_data["storages"][storage_name]
 
 
 #
@@ -85,7 +107,7 @@ def change_admin(username):
 
 
 def write_to_log(user_data: Dictionary, log: String):
-    current_time = datetime.now(utc_plus_4).strftime("%Y-%m-%d %H:%M:%S %z")
+    current_time = datetime.now(utc_plus_4).strftime("%Y-%m-%d %H:%M:%S")
     user_data["Log"].setdefault(current_time, log)
     save_user_data(user_data)
     return user_data

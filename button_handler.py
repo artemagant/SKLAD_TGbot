@@ -82,6 +82,52 @@ async def handle(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
         await query.edit_message_text(
             f"Меню вашего склада '{storage_name}'",
             reply_markup = keyboard.get_storage_configure_menu(storage_name, user_data))
+        
+    elif query.data.startswith("storagesettings_"):
+        username = query.data.split("_")[1]
+        storage_name = query.data.split("_")[2]
+        data.write_to_log(user_data, f"Storage '{storage_name}' settings of @{username} opened")
+        storage_owner_data = data.get_user_data(username)
+        storage_owner_data =data.write_to_log(storage_owner_data,f"@{user_data["info"]["username"]} setting your storage '{storage_name}'")
+        await query.edit_message_text(
+            f"Настройки вашего склада '{storage_name}'",
+            reply_markup = keyboard.get_storage_settings_menu(storage_name, user_data))
+
+    elif query.data.startswith("storageinfo_"):
+        username = query.data.split("_")[1]
+        storage_name = query.data.split("_")[2]
+        data.write_to_log(user_data, f"Storage '{storage_name}' info of @{username} opened")
+        storage_owner_data = data.get_user_data(username)
+        storage_owner_data =data.write_to_log(storage_owner_data,f"@{user_data["info"]["username"]} saw info of your storage '{storage_name}'")
+        storage_data = data.get_storage_data(data.get_user_data(username), storage_name)
+        storage_info = storage_data.get("info", {"name": "a", "description": None, "data_creating": None, "level": 0})
+        info_text = f"Описание: {storage_info["description"]}\nДата создания: {storage_info["date_creating"]}\nУровень: {storage_info["level"]}"
+        await query.edit_message_text(
+            f"Информация вашего склада '{storage_name}':\n{info_text}",
+            reply_markup = keyboard.get_storage_info_menu(storage_name, user_data))
+
+    elif query.data.startswith("storageitems_"):
+        username = query.data.split("_")[1]
+        storage_name = query.data.split("_")[2]
+        data.write_to_log(user_data, f"Storage '{storage_name}' itemes of @{username} opened")
+        storage_owner_data = data.get_user_data(username)
+        storage_owner_data =data.write_to_log(storage_owner_data,f"@{user_data["info"]["username"]} opened items menu of your storage '{storage_name}'")
+        await query.edit_message_text(
+            f"Список предметов вашего склада '{storage_name}'",
+            reply_markup = keyboard.get_storage_itemes_menu(storage_name, user_data))
+    elif query.data.startswith("createitem_"):
+        username = query.data.split("_")[1]
+        storage_name = query.data.split("_")[2]
+        data.write_to_log(user_data, f"In storage '{storage_name}' item is creating by @{username}")
+        storage_owner_data = data.get_user_data(username)
+        storage_owner_data =data.write_to_log(storage_owner_data,f"@{user_data["info"]["username"]} is creating item in your storage '{storage_name}'")
+        data.set_state(username, f"itemcreating_{username}_{storage_name}")
+        await query.edit_message_text(
+            f"Введите имя предмета",
+            reply_markup = keyboard.get_creating_item_menu(storage_name, user_data))
+
+
+
 
 
 

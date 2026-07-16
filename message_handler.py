@@ -15,7 +15,8 @@ async def handle_text(update: Update, context):
         return 1
 
     state = data.get_state(update.effective_user.username)
-    text = update.message.text 
+    text = update.message.text
+
     if (state == "admin_username_await"):
         mes = data.get_user_data(text)
         if (data.get_user_data(text)):
@@ -44,4 +45,10 @@ async def handle_text(update: Update, context):
                 f"Успех! Склад '{text}' создан",
                 reply_markup = keyboard.get_successed_storage_creation_menu(text, user_data)
             )
+    if (state.startswith("itemcreating_")):
+        username = state.split("_")[1]
+        user_data = data.get_user_data(username)
+        storage_name = state.split("_")[2]
+        storage_data = data.get_storage_data(user_data, storage_name)
+        user_data = data.create_item(user_data, storage_name, text)
     data.set_state(update.effective_user.username, "None")
