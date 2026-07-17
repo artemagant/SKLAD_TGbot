@@ -1,169 +1,24 @@
 {
-  "artemagant": {
-    "storages": {
-      "a": {
-        "storage": {
-          "a": {
-            "name": "a",
-            "description": null,
-            "place": null,
-            "amount": 0,
-            "date_creating": "2026-07-16 23:42:34"
-          },
-          "b": {
-            "name": "b",
-            "description": null,
-            "place": null,
-            "amount": 0,
-            "date_creating": "2026-07-16 23:43:10"
-          },
-          "ab": {
-            "name": "ab",
-            "description": null,
-            "place": null,
-            "amount": 0,
-            "date_creating": "2026-07-16 23:44:55"
-          },
-          "c": {
-            "name": "c",
-            "description": null,
-            "place": null,
-            "amount": 0,
-            "date_creating": "2026-07-16 23:45:16"
-          }
+    "artemagant": {
+        "storages": {},
+        "info": {
+            "username": "artemagant",
+            "admin": true,
+            "state": "None"
         },
-        "info": {
-          "name": "a",
-          "description": null,
-          "date_creating": "2026-07-16 20:39:44",
-          "level": 0
+        "Log": {
+            "2026-07-17 23:12:31": "New user",
+            "2026-07-17 23:12:41": "Storage menu opened",
+            "2026-07-17 23:12:43": "Add storage menu opened",
+            "2026-07-17 23:12:44": "Create storage 'a'",
+            "2026-07-17 23:12:46": "Configure storage 'a' of @artemagant",
+            "2026-07-17 23:12:49": "Storage 'a' itemes of @artemagant opened",
+            "2026-07-17 23:12:50": "In storage 'a' item is creating by @artemagant",
+            "2026-07-17 23:13:03": "Storage 'a' itemes of @artemagant opened",
+            "2026-07-17 23:13:05": "Configure storage 'a' of @artemagant",
+            "2026-07-17 23:13:06": "Storage 'a' settings of @artemagant opened",
+            "2026-07-17 23:13:08": "Storage 'a' of @artemagant deleted",
+            "2026-07-17 23:13:09": "Storage menu opened"
         }
-      },
-      "b": {
-        "storage": {},
-        "info": {
-          "name": "b",
-          "description": null,
-          "date_creating": "2026-07-16 20:40:29",
-          "level": 0
-        }
-      }
-    },
-    "info": {
-      "username": "artemagant",
-      "admin": true,
-      "state": "None"
-    },
-    "Log": {
-      "2026-07-16 22:57:43": "Logs been resets by @artemagant",
-      "2026-07-16 22:59:21": "Main menu opened",
-      "2026-07-16 22:59:23": "Storage menu opened",
-      "2026-07-16 22:59:25": "Storage list opened",
-      "2026-07-16 22:59:27": "Configure storage 'b' of @artemagant",
-      "2026-07-16 22:59:29": "Storage 'b' itemes of @artemagant opened",
-      "2026-07-16 22:59:31": "In storage 'b' item is creating by @artemagant",
-      "2026-07-16 22:59:35": "Menu 'cancelitemcreating_artemagant_b' opened",
-      "2026-07-16 22:59:37": "Main menu opened",
-      "2026-07-16 22:59:38": "Storage menu opened",
-      "2026-07-16 22:59:40": "Storage list opened",
-      "2026-07-16 22:59:41": "Configure storage 'b' of @artemagant",
-      "2026-07-16 22:59:43": "Storage 'b' itemes of @artemagant opened",
-      "2026-07-16 22:59:59": "In storage 'b' item is creating by @artemagant",
-      "2026-07-16 23:00:54": "Menu 'cancelitemcreating_artemagant_b' opened",
-      "2026-07-16 23:00:56": "Main menu opened",
-      "2026-07-16 23:00:57": "Storage menu opened",
-      "2026-07-16 23:00:59": "Storage list opened",
-      "2026-07-16 23:01:01": "Configure storage 'a' of @artemagant",
-      "2026-07-16 23:01:04": "Storage 'a' itemes of @artemagant opened",
-      "2026-07-16 23:01:06": "In storage 'a' item is creating by @artemagant",
-      "2026-07-16 23:40:09": "Main menu opened",
-      "2026-07-16 23:41:59": "Main menu opened",
-      "2026-07-16 23:42:11": "Main menu opened",
-      "2026-07-16 23:42:21": "Storage menu opened",
-      "2026-07-16 23:42:23": "Storage list opened",
-      "2026-07-16 23:42:25": "Configure storage 'a' of @artemagant",
-      "2026-07-16 23:42:28": "Storage 'a' itemes of @artemagant opened",
-      "2026-07-16 23:42:31": "In storage 'a' item is creating by @artemagant",
-      "2026-07-16 23:42:54": "Menu 'cancelitemcreating_artemagant_a' opened",
-      "2026-07-16 23:42:56": "Main menu opened",
-      "2026-07-16 23:42:58": "Storage menu opened",
-      "2026-07-16 23:43:00": "Storage list opened",
-      "2026-07-16 23:43:02": "Configure storage 'a' of @artemagant",
-      "2026-07-16 23:43:04": "Storage 'a' itemes of @artemagant opened",
-      "2026-07-16 23:43:08": "In storage 'a' item is creating by @artemagant",
-      "2026-07-16 23:43:57": "Storage menu opened",
-      "2026-07-16 23:44:04": "Storage list opened",
-      "2026-07-16 23:44:14": "Configure storage 'b' of @artemagant",
-      "2026-07-16 23:44:19": "Storage list opened",
-      "2026-07-16 23:44:24": "Configure storage 'a' of @artemagant",
-      "2026-07-16 23:44:33": "Storage 'a' itemes of @artemagant opened",
-      "2026-07-16 23:44:50": "In storage 'a' item is creating by @artemagant",
-      "2026-07-16 23:44:59": "Storage menu opened",
-      "2026-07-16 23:45:01": "Storage list opened",
-      "2026-07-16 23:45:05": "Configure storage 'a' of @artemagant",
-      "2026-07-16 23:45:09": "Storage 'a' itemes of @artemagant opened",
-      "2026-07-16 23:45:11": "In storage 'a' item is creating by @artemagant",
-      "2026-07-16 23:45:27": "Storage menu opened",
-      "2026-07-16 23:45:39": "Storage list opened",
-      "2026-07-16 23:45:41": "Configure storage 'a' of @artemagant",
-      "2026-07-16 23:45:46": "Storage 'a' itemes of @artemagant opened",
-      "2026-07-16 23:45:54": "Menu 'configureitem_artemagant_a' opened",
-      "2026-07-16 23:52:02": "Main menu opened",
-      "2026-07-17 12:02:48": "Info menu opened",
-      "2026-07-17 12:02:49": "Admin menu called"
     }
-  },
-  "Makazi69": {
-    "storages": {},
-    "info": {
-      "username": "Makazi69",
-      "admin": true,
-      "state": null
-    },
-    "Log": {
-      "2026-07-16 16:08:45 +0400": "New user"
-    }
-  },
-  "a": {
-    "storages": {},
-    "info": {
-      "username": "a",
-      "admin": false,
-      "state": null
-    },
-    "Log": {
-      "2026-07-16 15:06:38 +0400": "New user",
-      "2026-07-16 15:07:48 +0400": "@artemagant configure your storage 'a'"
-    }
-  },
-  "Jherosi": {
-    "storages": {
-      "a": {
-        "storage": {},
-        "info": {
-          "name": "a",
-          "description": null,
-          "date_creating": "2026-07-16 23:02:31",
-          "level": 0
-        }
-      }
-    },
-    "info": {
-      "username": "Jherosi",
-      "admin": false,
-      "state": "itemcreating_Jherosi_a"
-    },
-    "Log": {
-      "2026-07-16 23:02:00": "New user",
-      "2026-07-16 23:02:21": "Storage menu opened",
-      "2026-07-16 23:02:24": "Storage list opened",
-      "2026-07-16 23:02:25": "Storage menu opened",
-      "2026-07-16 23:02:27": "Add storage menu opened",
-      "2026-07-16 23:02:31": "Create storage 'a'",
-      "2026-07-16 23:02:33": "Configure storage 'a' of @Jherosi",
-      "2026-07-16 23:02:35": "Storage 'a' itemes of @Jherosi opened",
-      "2026-07-16 23:02:37": "In storage 'a' item is creating by @Jherosi"
-    }
-  },
-  "ajamailhimself": null
 }

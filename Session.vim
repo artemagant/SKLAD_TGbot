@@ -13,14 +13,14 @@ set shortmess+=aoO
 badd +32 main.py
 badd +1 token.txt
 badd +97 commands.py
-badd +160 keyboard.py
-badd +109 button_handler.py
-badd +55 data.py
-badd +19 data.json
+badd +71 keyboard.py
+badd +148 button_handler.py
+badd +104 data.py
+badd +41 data.json
 badd +1 ~/Desktop/Code/TgBotsTokens/SKLAD_token.txt
 badd +1 buttons_handler
 badd +1 button_handler
-badd +48 message_handler.py
+badd +86 message_handler.py
 badd +4 state.py
 argglobal
 %argdel
@@ -86,12 +86,12 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 134 - ((38 * winheight(0) + 26) / 53)
+let s:l = 43 - ((42 * winheight(0) + 26) / 53)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 134
-normal! 0
+keepjumps 43
+normal! 051|
 tabnext
 edit message_handler.py
 argglobal
@@ -106,12 +106,12 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 53 - ((30 * winheight(0) + 26) / 53)
+let s:l = 48 - ((10 * winheight(0) + 26) / 53)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 53
-normal! 018|
+keepjumps 48
+normal! 043|
 tabnext
 edit keyboard.py
 argglobal
@@ -126,12 +126,12 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 160 - ((26 * winheight(0) + 26) / 53)
+let s:l = 169 - ((39 * winheight(0) + 26) / 53)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 160
-normal! 05|
+keepjumps 169
+normal! 075|
 tabnext
 edit data.py
 argglobal
@@ -146,12 +146,12 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 31 - ((30 * winheight(0) + 26) / 53)
+let s:l = 112 - ((27 * winheight(0) + 26) / 53)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 31
-normal! 029|
+keepjumps 112
+normal! 088|
 tabnext
 edit data.json
 argglobal
@@ -166,12 +166,12 @@ setlocal foldnestmax=20
 setlocal foldenable
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 19 - ((18 * winheight(0) + 26) / 53)
+let s:l = 30 - ((20 * winheight(0) + 26) / 53)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 19
-normal! 09|
+keepjumps 30
+normal! 026|
 tabnext
 edit ~/Desktop/Code/TgBotsTokens/SKLAD_token.txt
 argglobal
@@ -192,7 +192,7 @@ normal! zt
 keepjumps 1
 normal! 0
 lcd ~/Desktop/Code/SKLAD_TGbot
-tabnext 6
+tabnext 4
 set stal=1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

@@ -50,5 +50,128 @@ async def handle_text(update: tg.Update, context):
         user_data = data.get_user_data(username)
         storage_name = state.split("_")[2]
         storage_data = data.get_storage_data(user_data, storage_name)
-        user_data = data.create_item(user_data, storage_name, text)
+        if (text in storage_data["storage"]):
+            await update.message.reply_text(
+                f"Предмет {text} уже существует",
+                reply_markup = keyboard.get_storage_itemes_menu(user_data, storage_name)
+            )
+        else:
+            user_data = data.create_item(user_data, storage_name, text)
+            await update.message.reply_text(
+                f"Успех! Предмет '{text}' создан",
+                reply_markup = keyboard.get_success_item_creation_menu(user_data, storage_name, text)
+            )
+
+    if (state.startswith("storagenamechanging_")):
+        username = state.split("_")[1]
+        user_data = data.get_user_data(username)
+        storages = user_data["storages"]
+        storage_name = state.split("_")[2]
+        storage_data = data.get_storage_data(user_data, storage_name)
+        if (storage_name != text and not text in storages):
+            data.change_storage_name(user_data, storage_name, text)
+            await update.message.reply_text(
+                f"Успех! Склад '{storage_name}' теперь '{text}'",
+                reply_markup = keyboard.get_storage_info_menu(text, user_data)
+            )
+        else:
+            await update.message.reply_text(
+                f"Склад '{text}' уже существует",
+                reply_markup = keyboard.get_storage_info_menu(storage_name, user_data)
+            )
+    
+    if (state.startswith("storagedescriptionchanging_")):
+        username = state.split("_")[1]
+        user_data = data.get_user_data(username)
+        storages = user_data["storages"]
+        storage_name = state.split("_")[2]
+        storage_data = data.get_storage_data(user_data, storage_name)
+        description = storage_data["info"]["description"]
+        if (description != text):
+            data.change_storage_description(user_data, storage_name, text)
+            await update.message.reply_text(
+                f"Успех! Описание склада '{storage_name}' теперь '{text}'",
+                reply_markup = keyboard.get_storage_info_menu(storage_name, user_data)
+            )
+        else:
+            await update.message.reply_text(
+                f"Описание '{text}'\n совпадает с прошлым описанием",
+                reply_markup = keyboard.get_storage_info_menu(storage_name, user_data)
+            )
+    
+    if (state.startswith("changeitemname_")):
+        username = state.split("_")[1]
+        user_data = data.get_user_data(username)
+        storage_name = state.split("_")[2]
+        storage_data = data.get_storage_data(user_data, storage_name)
+        item_name = state.split("_")[3]
+        item_data = data.get_item_data(user_data, storage_name, item_name)
+        if (item_name != text and not text in storage_data["storage"]):
+            data.change_item_name(user_data, storage_name, item_name, text)
+            await update.message.reply_text(
+                f"Настройки предмета '{text}'\nУспех! Имя предмета '{item_name}' теперь '{text}'",
+                reply_markup = keyboard.get_item_settings_menu(user_data, storage_name, text)
+            )
+        else:
+            await update.message.reply_text(
+                f"Настройки предмета '{item_name}'\nИмя '{text}' совпадает с прошлым именем предмета или такой предмет уже существует",
+                reply_markup = keyboard.get_item_settings_menu(user_data, storage_name, item_name)
+            )
+    if (state.startswith("changeitemdescription_")):
+        username = state.split("_")[1]
+        user_data = data.get_user_data(username)
+        storage_name = state.split("_")[2]
+        storage_data = data.get_storage_data(user_data, storage_name)
+        item_name = state.split("_")[3]
+        item_data = data.get_item_data(user_data, storage_name, item_name)
+        if (item_data["description"] != text):
+            data.change_item_description(user_data, storage_name, item_name, text)
+            await update.message.reply_text(
+                f"Настройки предмета '{text}'\nУспех! Описание предмета '{item_name}' теперь '{text}'",
+                reply_markup = keyboard.get_item_settings_menu(user_data, storage_name, item_name)
+            )
+        else:
+            await update.message.reply_text(
+                f"Настройки предмета '{item_name}'\nОписание '{text}' совпадает с прошлым описанием предмета",
+                reply_markup = keyboard.get_item_settings_menu(user_data, storage_name, item_name)
+            )
+    
+    if (state.startswith("changeitemplace_")):
+        username = state.split("_")[1]
+        user_data = data.get_user_data(username)
+        storage_name = state.split("_")[2]
+        storage_data = data.get_storage_data(user_data, storage_name)
+        item_name = state.split("_")[3]
+        item_data = data.get_item_data(user_data, storage_name, item_name)
+        if (item_data["place"] != text):
+            data.change_item_place(user_data, storage_name, item_name, text)
+            await update.message.reply_text(
+                f"Настройки предмета '{text}'\nУспех! Место предмета '{item_name}' теперь '{text}'",
+                reply_markup = keyboard.get_item_settings_menu(user_data, storage_name, item_name)
+            )
+        else:
+            await update.message.reply_text(
+                f"Настройки предмета '{item_name}'\nМесто '{text}' совпадает с прошлым местом предмета",
+                reply_markup = keyboard.get_item_settings_menu(user_data, storage_name, item_name)
+                )
+
+    if (state.startswith("changeitemamount_")):
+        username = state.split("_")[1]
+        user_data = data.get_user_data(username)
+        storage_name = state.split("_")[2]
+        storage_data = data.get_storage_data(user_data, storage_name)
+        item_name = state.split("_")[3]
+        item_data = data.get_item_data(user_data, storage_name, item_name)
+        if (item_data["amount"] != int(text)):
+            data.change_item_amount(user_data, storage_name, item_name, text)
+            await update.message.reply_text(
+                f"Настройки предмета '{text}'\nУспех! Количество предмета '{item_name}' теперь {text}",
+                reply_markup = keyboard.get_item_settings_menu(user_data, storage_name, item_name)
+            )
+        else:
+            await update.message.reply_text(
+                f"Настройки предмета '{item_name}'\nКоличество '{text}' совпадает с прошлым количеством предмета",
+                reply_markup = keyboard.get_item_settings_menu(user_data, storage_name, item_name)
+                )
+
     data.set_state(update.effective_user.username, "None")

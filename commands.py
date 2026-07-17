@@ -13,6 +13,10 @@ async def start(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
         user_data = data.get_default_user(update.effective_user.username)
         user_data = data.write_to_log(user_data, f"New user")
         data.save_user_data(user_data)
+        await context.bot.send_message(
+            chat_id=update.message.chat_id, 
+            text=f"Добро пожаловать в этого бота!\nПеред стартом, вы должны знать, что вся ваша информация хранится в обычном файле data.json и может быть видна всем на https://github.com/artemagant/SKLAD_TGbot\n Удачи!",
+        )
 
     user_data = data.write_to_log(user_data, f"Main menu opened")
     data.save_user_data(user_data)

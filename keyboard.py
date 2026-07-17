@@ -40,6 +40,14 @@ def get_info_menu():
     ]
     return tg.InlineKeyboardMarkup(keyboard)
 
+def get_info_bot_menu():
+    keyboard = [
+        [
+            tg.InlineKeyboardButton("Вернуться", callback_data = "info")
+        ]
+    ]
+    return tg.InlineKeyboardMarkup(keyboard)
+
 def get_info_menu_admin():
     keyboard = [
         [tg.InlineKeyboardButton("Aдмин меню", callback_data = "admin_menu")],
@@ -135,18 +143,18 @@ def get_storage_itemes_menu(storage_name, user_data):
 
     for i in range(0, len(itemes_list), 3):
         row = []
-        storage_1 = itemes_list[i]
-        callback_1 = f"configureitem_{user_data["info"]["username"]}_{storage_1}"
-        row.append(tg.InlineKeyboardButton(storage_1, callback_data = callback_1))
+        item_1 = itemes_list[i]
+        callback_1 = f"configureitem_{user_data["info"]["username"]}_{storage_name}_{item_1}"
+        row.append(tg.InlineKeyboardButton(item_1, callback_data = callback_1))
 
         if i + 1 < len(itemes_list):
-            storage_2 = itemes_list[i+1]
-            callback_2 = f"configurestorage_{user_data["info"]["username"]}_{storage_2}"
-            row.append(tg.InlineKeyboardButton(storage_2, callback_data = callback_2))
+            item_2 = itemes_list[i+1]
+            callback_2 = f"configurestorage_{user_data["info"]["username"]}_{storage_name}_{item_2}"
+            row.append(tg.InlineKeyboardButton(item_2, callback_data = callback_2))
         if i + 2 < len(itemes_list):
-            storage_3 = itemes_list[i+2]
-            callback_3 = f"configurestorage_{user_data["info"]["username"]}_{storage_3}"
-            row.append(tg.InlineKeyboardButton(storage_3, callback_data = callback_3))
+            item_3 = itemes_list[i+2]
+            callback_3 = f"configurestorage_{user_data["info"]["username"]}_{storage_name}_{item_3}"
+            row.append(tg.InlineKeyboardButton(item_3, callback_data = callback_3))
 
         keyboard.append(row)
     keyboard.append([
@@ -155,13 +163,59 @@ def get_storage_itemes_menu(storage_name, user_data):
                     )
     return tg.InlineKeyboardMarkup(keyboard)
 
-def get_creating_item_menu(storage_name, user_data):
+def get_creating_item_menu(storage_name, user_data, text = "Отменить"):
     username = user_data["info"]["username"]
     keyboard = [
-        [tg.InlineKeyboardButton("Отменить", callback_data = f"cancelitemcreating_{username}_{storage_name}")]
+        [tg.InlineKeyboardButton(text, callback_data = f"storageitems_{username}_{storage_name}")]
     ]
     return tg.InlineKeyboardMarkup(keyboard)
 
+def get_success_item_creation_menu(user_data, storage_name, item_name):
+    username = user_data["info"]["username"]
+    keyboard = [
+        [tg.InlineKeyboardButton("Меню предмета", callback_data = f"configureitem_{username}_{storage_name}_{item_name}")],
+        [tg.InlineKeyboardButton("Вернуться", callback_data = f"storageitems_{username}_{storage_name}")]
+    ]
+    return tg.InlineKeyboardMarkup(keyboard)
+
+def get_configure_item_menu(user_data, storage_name, item_name):
+    username = user_data["info"]["username"]
+    keyboard = [
+        [tg.InlineKeyboardButton("Информация", callback_data = f"iteminfo_{username}_{storage_name}_{item_name}"),
+         tg.InlineKeyboardButton("Настройки", callback_data = f"itemsettings_{username}_{storage_name}_{item_name}")],
+        [tg.InlineKeyboardButton("Вернуться", callback_data = f"storageitems_{username}_{storage_name}")],
+    ]
+    return tg.InlineKeyboardMarkup(keyboard)
+
+def get_item_info_menu(user_data, storage_name, item_name):
+    username = user_data["info"]["username"]
+    keyboard = [
+        [tg.InlineKeyboardButton("Вернуться", callback_data = f"configureitem_{username}_{storage_name}_{item_name}")]
+    ]
+    return tg.InlineKeyboardMarkup(keyboard)
+
+def get_item_settings_menu(user_data, storage_name, item_name):
+    username = user_data["info"]["username"]
+    keyboard = [
+        [
+            tg.InlineKeyboardButton("Изменить имя", callback_data = f"changenameitem_{username}_{storage_name}_{item_name}"),
+            tg.InlineKeyboardButton("Изменить описание", callback_data = f"changedescriptionitem_{username}_{storage_name}_{item_name}"),
+         ],
+        [
+            tg.InlineKeyboardButton("Изменить место", callback_data = f"changeplaceitem_{username}_{storage_name}_{item_name}"),
+            tg.InlineKeyboardButton("Изменить количество", callback_data = f"changeamountitem_{username}_{storage_name}_{item_name}"),
+         ],
+        [tg.InlineKeyboardButton("Удалить", callback_data = f"deleteitem_{username}_{storage_name}_{item_name}")],
+        [tg.InlineKeyboardButton("Вернуться", callback_data = f"configureitem_{username}_{storage_name}_{item_name}")]
+    ]
+    return tg.InlineKeyboardMarkup(keyboard)
+
+def get_return_to_item_settings_menu(user_data, storage_name, item_name):
+    username = user_data["info"]["username"]
+    keyboard = [
+        [tg.InlineKeyboardButton("Отменить", callback_data = f"itemsettings_{username}_{storage_name}_{item_name}")]
+    ]
+    return tg.InlineKeyboardMarkup(keyboard)
 
 #
 # Admin

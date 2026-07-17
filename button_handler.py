@@ -25,6 +25,7 @@ async def handle(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
             "Меню ваших складов",
             reply_markup = keyboard.get_storage_menu()
         )
+    
     elif query.data == "info":
         info_keyboard = None
         if True:
@@ -36,6 +37,21 @@ async def handle(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
             "Меню информации",
             reply_markup = info_keyboard
         )
+    
+    elif query.data == "info_bot":
+        data.write_to_log(user_data, "Bot info opened")
+        await query.edit_message_text(
+            "A Bot Sklad Bot - это бот, сделанный @artemagant\nВся ваша информация сохраняется в обычном файле data.json и потом может появиться в https://github.com/artemagant/SKLAD_TGbot\nТам же находится и весь код бота",
+            reply_markup = keyboard.get_info_bot_menu()
+    
+        )
+    elif query.data == "info_user":
+        data.write_to_log(user_data, "User info opened")
+        await query.edit_message_text(
+            f"Username: @{user_data["info"]["username"]}\nIs admin: {user_data["info"]["admin"]}\nВсе. Больше ничего нет.",
+            reply_markup = keyboard.get_info_bot_menu()
+        )
+
     elif query.data == "return_main":
         data.write_to_log(user_data, f"Main menu opened")
         await query.edit_message_text(
@@ -126,14 +142,128 @@ async def handle(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
             f"Введите имя предмета",
             reply_markup = keyboard.get_creating_item_menu(storage_name, user_data))
 
+    elif query.data.startswith("storagechangename_"):
+        username = query.data.split("_")[1]
+        storage_name = query.data.split("_")[2]
+        data.write_to_log(user_data, f"In storage '{storage_name}' name is changing by @{username}")
+        storage_owner_data = data.get_user_data(username)
+        storage_owner_data = data.write_to_log(storage_owner_data,f"@{user_data["info"]["username"]} is chanching name of your storage '{storage_name}'")
+        data.set_state(username, f"storagenamechanging_{username}_{storage_name}")
+        await query.edit_message_text(
+            f"Введите новое имя склада",
+            reply_markup = keyboard.get_creating_item_menu(storage_name, user_data))
+    
+    elif query.data.startswith("storagechangedescription_"):
+        username = query.data.split("_")[1]
+        storage_name = query.data.split("_")[2]
+        data.write_to_log(user_data, f"In storage '{storage_name}' description is changing by @{username}")
+        storage_owner_data = data.get_user_data(username)
+        storage_owner_data = data.write_to_log(storage_owner_data,f"@{user_data["info"]["username"]} is chanching description of your storage '{storage_name}'")
+        data.set_state(username, f"storagedescriptionchanging_{username}_{storage_name}")
+        await query.edit_message_text(
+            f"Введите новое описание склада",
+            reply_markup = keyboard.get_creating_item_menu(storage_name, user_data))
 
 
+    elif query.data.startswith("storagereset_"):
+        username = query.data.split("_")[1]
+        storage_name = query.data.split("_")[2]
+        data.write_to_log(user_data, f"Storage '{storage_name}' of @{username} reseted")
+        storage_owner_data = data.get_user_data(username)
+        storage_owner_data =data.write_to_log(storage_owner_data,f"@{user_data["info"]["username"]} resets your storage '{storage_name}'")
+        
+        data.reset_storage(storage_owner_data, storage_name)
+
+        await query.edit_message_text(
+            f"Успех! Ваш склад '{storage_name}' сброшен",
+            reply_markup = keyboard.get_storage_info_menu(storage_name, user_data))
 
 
+    elif query.data.startswith("storagedelete_"):
+        username = query.data.split("_")[1]
+        storage_name = query.data.split("_")[2]
+        data.write_to_log(user_data, f"Storage '{storage_name}' of @{username} deleted")
+        storage_owner_data = data.get_user_data(username)
+        storage_owner_data =data.write_to_log(storage_owner_data,f"@{user_data["info"]["username"]} deletes your storage '{storage_name}'")
+        
+        user_data = data.delete_storage(storage_owner_data, storage_name)
 
+        await query.edit_message_text(
+            f"Успех! Ваш склад '{storage_name}' удален",
+            reply_markup = keyboard.get_storage_list_menu(user_data))
 
+    elif query.data.startswith("configureitem_"):
+        username = query.data.split("_")[1]
+        storage_name = query.data.split("_")[2]
+        item_name = query.data.split("_")[3]
+        await query.edit_message_text(
+            f"Меню предмета '{item_name}'",
+            reply_markup = keyboard.get_configure_item_menu(user_data, storage_name, item_name))
+    
+    elif query.data.startswith("iteminfo_"):
+        username = query.data.split("_")[1]
+        storage_name = query.data.split("_")[2]
+        item_name = query.data.split("_")[3]
+        item_data = data.get_item_data(data.get_user_data(username), storage_name, item_name)
+        await query.edit_message_text(
+            f"Информация предмета '{item_name}':\nОписание: '{item_data["description"]}'\nМесто хранения: '{item_data["place"]}'\nКоличество: {item_data["amount"]}\nДата добавления: {item_data["date_creating"]}",
+            reply_markup = keyboard.get_item_info_menu(user_data, storage_name, item_name))
 
+    elif query.data.startswith("itemsettings_"):
+        username = query.data.split("_")[1]
+        storage_name = query.data.split("_")[2]
+        item_name = query.data.split("_")[3]
+        await query.edit_message_text(
+            f"Настройки предмета '{item_name}'",
+            reply_markup = keyboard.get_item_settings_menu(user_data, storage_name, item_name))
 
+    elif query.data.startswith("changenameitem_"):
+        username = query.data.split("_")[1]
+        storage_name = query.data.split("_")[2]
+        item_name = query.data.split("_")[3]
+        data.set_state(username, f"changeitemname_{username}_{storage_name}_{item_name}")
+        await query.edit_message_text(
+            f"Введите новое имя для предмета '{item_name}'",
+            reply_markup = keyboard.get_return_to_item_settings_menu(user_data, storage_name, item_name))
+
+    elif query.data.startswith("changedescriptionitem_"):
+        username = query.data.split("_")[1]
+        storage_name = query.data.split("_")[2]
+        item_name = query.data.split("_")[3]
+        item_data = data.get_item_data(user_data, storage_name, item_name)
+        data.set_state(username, f"changeitemdescription_{username}_{storage_name}_{item_name}")
+        await query.edit_message_text(
+            f"Введите новое описание для предмета '{item_name}' ({item_data["description"]})",
+            reply_markup = keyboard.get_return_to_item_settings_menu(user_data, storage_name, item_name))
+
+    elif query.data.startswith("changeplaceitem_"):
+        username = query.data.split("_")[1]
+        storage_name = query.data.split("_")[2]
+        item_name = query.data.split("_")[3]
+        item_data = data.get_item_data(user_data, storage_name, item_name)
+        data.set_state(username, f"changeitemplace_{username}_{storage_name}_{item_name}")
+        await query.edit_message_text(
+            f"Введите новое место для предмета '{item_name}' ({item_data["place"]})",
+            reply_markup = keyboard.get_return_to_item_settings_menu(user_data, storage_name, item_name))
+    
+    elif query.data.startswith("changeamountitem_"):
+        username = query.data.split("_")[1]
+        storage_name = query.data.split("_")[2]
+        item_name = query.data.split("_")[3]
+        item_data = data.get_item_data(user_data, storage_name, item_name)
+        data.set_state(username, f"changeitemamount_{username}_{storage_name}_{item_name}")
+        await query.edit_message_text(
+            f"Введите новое количество предмета '{item_name}' ({item_data["amount"]})",
+            reply_markup = keyboard.get_return_to_item_settings_menu(user_data, storage_name, item_name))
+    
+    elif query.data.startswith("deleteitem_"):
+        username = query.data.split("_")[1]
+        storage_name = query.data.split("_")[2]
+        item_name = query.data.split("_")[3]
+        data.delete_item(user_data, storage_name, item_name)
+        await query.edit_message_text(
+            f"Успех! Предмета '{item_name}' удален",
+            reply_markup = keyboard.get_creating_item_menu(storage_name, user_data, "Вернуться"))
 
 
 
@@ -141,6 +271,13 @@ async def handle(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
     # Admin menu buttons
     #
     elif query.data == "clean_log":
+        if (not user_data["info"]["admin"]):
+            data.write_to_log(user_data, f"Admin access denied")
+            await query.edit_message_text(
+                "У тебя нет админ доступа.\nСвяжитесь с @artemagant для его получения",
+                reply_markup = keyboard.get_under_construction_menu()
+            )
+            return
         data.clean_log(user_data)
         data.write_to_log(user_data, f"Logs cleaned by @{update.effective_user.username}")
         await query.edit_message_text(
@@ -148,6 +285,13 @@ async def handle(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
             reply_markup = keyboard.get_admin_menu()
         )
     elif query.data == "admin_menu":
+        if (not user_data["info"]["admin"]):
+            data.write_to_log(user_data, f"Admin access denied")
+            await query.edit_message_text(
+                "У тебя нет админ доступа.\nСвяжитесь с @artemagant для его получения",
+                reply_markup = keyboard.get_under_construction_menu()
+            )
+            return
         data.write_to_log(user_data, f"Admin menu called")
         user_data = data.get_user_data(user_data.get("info", {"username": None, "admin": False, "state": None}).get("username", None))
         if (not user_data["info"]["admin"]):
@@ -164,6 +308,14 @@ async def handle(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
             reply_markup = keyboard.get_admin_menu()
         )
     elif query.data == "admin_user_data":
+        if (not user_data["info"]["admin"]):
+            data.write_to_log(user_data, f"Admin access denied")
+            await query.edit_message_text(
+                "У тебя нет админ доступа.\nСвяжитесь с @artemagant для его получения",
+                reply_markup = keyboard.get_under_construction_menu()
+            )
+            return
+
         data.write_to_log(user_data, f"User data configuration opened")
         user_data = data.get_user_data(update.effective_user.username)
         await query.edit_message_text(
@@ -172,6 +324,14 @@ async def handle(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
         )
         data.set_state(user_data["info"]["username"], "admin_username_await")
     elif query.data.startswith("yesforcreatedefaultuserdata_"):
+        if (not user_data["info"]["admin"]):
+            data.write_to_log(user_data, f"Admin access denied")
+            await query.edit_message_text(
+                "У тебя нет админ доступа.\nСвяжитесь с @artemagant для его получения",
+                reply_markup = keyboard.get_under_construction_menu()
+            )
+            return
+
         username = query.data.split("_")[1]
         data.write_to_log(user_data, f"Create default user for @{username}")
         user_data = data.get_default_user(username)
@@ -182,6 +342,14 @@ async def handle(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
             reply_markup = keyboard.get_return_to_admin_menu()
         )
     elif query.data.startswith("adminresetuser_"):
+        if (not user_data["info"]["admin"]):
+            data.write_to_log(user_data, f"Admin access denied")
+            await query.edit_message_text(
+                "У тебя нет админ доступа.\nСвяжитесь с @artemagant для его получения",
+                reply_markup = keyboard.get_under_construction_menu()
+            )
+            return
+
         username = query.data.split("_")[1]
         data.write_to_log(user_data, f"Resets user {username}")
         data.save_user_data(data.get_default_user(username))
@@ -191,6 +359,14 @@ async def handle(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
             reply_markup = keyboard.get_return_to_admin_menu()
         )
     elif query.data.startswith("admindeleteuser_"):
+        if (not user_data["info"]["admin"]):
+            data.write_to_log(user_data, f"Admin access denied")
+            await query.edit_message_text(
+                "У тебя нет админ доступа.\nСвяжитесь с @artemagant для его получения",
+                reply_markup = keyboard.get_under_construction_menu()
+            )
+            return
+
         username = query.data.split("_")[1]
         data.write_to_log(user_data, f"Deletes user {username}")
         data.delete_user_data(username)
@@ -199,6 +375,14 @@ async def handle(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
             reply_markup = keyboard.get_return_to_admin_menu()
         )
     elif query.data.startswith("admindeletelogs_"):
+        if (not user_data["info"]["admin"]):
+            data.write_to_log(user_data, f"Admin access denied")
+            await query.edit_message_text(
+                "У тебя нет админ доступа.\nСвяжитесь с @artemagant для его получения",
+                reply_markup = keyboard.get_under_construction_menu()
+            )
+            return
+
         username = query.data.split("_")[1]
         data.write_to_log(user_data, f"Delets logs of {username}")
         data.delete_logs_user(username)
@@ -208,6 +392,14 @@ async def handle(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
             reply_markup = keyboard.get_return_to_admin_menu()
         )
     elif query.data.startswith("adminchangeadmin_"):
+        if (not user_data["info"]["admin"]):
+            data.write_to_log(user_data, f"Admin access denied")
+            await query.edit_message_text(
+                "У тебя нет админ доступа.\nСвяжитесь с @artemagant для его получения",
+                reply_markup = keyboard.get_under_construction_menu()
+            )
+            return
+
         username = query.data.split("_")[1]
         data.write_to_log(user_data, f"Change admin status of @{username} to {not data.get_user_data(username)["info"]["admin"]}")
         data.change_admin(username)
