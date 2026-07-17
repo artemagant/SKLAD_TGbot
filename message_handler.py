@@ -5,7 +5,7 @@ import json
 import data as data
 import keyboard as keyboard
 
-async def handle_text(update: Update, context):
+async def handle_text(update: tg.Update, context):
     user_data = data.get_user_data(update.effective_user.username)
 
     if not user_data:

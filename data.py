@@ -78,7 +78,7 @@ def create_storage(user_data, storage_name):
 def create_item(user_data, storage_name, item_name):
     storage_itemes = user_data["storages"][storage_name]["storage"]
     storage_itemes[item_name] = get_default_item(item_name)
-    user_data["storage"][storage_name]["storages"] = storage_itemes
+    user_data["storages"][storage_name]["storage"] = storage_itemes
     save_user_data(user_data)
     return user_data
 
@@ -106,7 +106,7 @@ def change_admin(username):
     save_user_data(data[username])
 
 
-def write_to_log(user_data: Dictionary, log: String):
+def write_to_log(user_data, log):
     current_time = datetime.now(utc_plus_4).strftime("%Y-%m-%d %H:%M:%S")
     user_data["Log"].setdefault(current_time, log)
     save_user_data(user_data)

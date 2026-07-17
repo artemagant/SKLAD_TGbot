@@ -4,7 +4,7 @@ import telegram.ext as tgext
 import keyboard as keyboard
 import data as data
 
-def commands_action(update: Update):
+def commands_action(update: tg.Update):
     data.set_state(update.effective_user.username, "None")
 
 async def start(update: tg.Update, context: tgext.ContextTypes.DEFAULT_TYPE):
